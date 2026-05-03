@@ -53,7 +53,6 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(4px);
-            cursor: pointer;
         }
 
         .link-card:hover {
@@ -108,10 +107,10 @@
                 <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">LinkedIn</span>
             </a>
 
-            <!-- CV (With JavaScript fallback for preview) -->
-            <button onclick="viewCV()" class="link-card block w-full py-5 px-8 rounded-full text-center group">
+            <!-- CV (Direct Link to file) -->
+            <a href="resume.pdf" target="_blank" class="link-card block w-full py-5 px-8 rounded-full text-center group">
                 <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">Curriculum Vitae</span>
-            </button>
+            </a>
 
             <!-- Instagram -->
             <a href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&utm_source=qr" target="_blank" class="link-card block w-full py-5 px-8 rounded-full text-center group">
@@ -132,48 +131,10 @@
     </main>
 
     <script>
-        // Ensure the page is interactive after the intro
+        // Re-enable scrolling after intro
         setTimeout(() => {
             document.body.style.overflow = 'auto';
         }, 3000);
-
-        function viewCV() {
-            // Attempt to open the local PDF first (this works on GitHub Pages)
-            // But for this preview environment, we generate a clean view
-            const resumeContent = `
-                <html>
-                <head>
-                    <title>Ethan Kong - Resume</title>
-                    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-                    <style>body { font-family: sans-serif; color: #333; padding: 40px; max-width: 800px; margin: auto; }</style>
-                </head>
-                <body>
-                    <h1 class="text-3xl font-bold">ETHAN KONG LYE KIT</h1>
-                    <p class="text-gray-600 mb-4">+65 8322 0982 | e.kong08@yahoo.com</p>
-                    
-                    <h2 class="text-xl font-semibold border-b mt-6">Education</h2>
-                    <p><strong>Hwa Chong Institution (Junior College)</strong> (2025-2026)</p>
-                    <p>Science Math Talent Programme (PCME/H3 Physics)</p>
-                    
-                    <h2 class="text-xl font-semibold border-b mt-6">Key Achievements</h2>
-                    <ul class="list-disc ml-5">
-                        <li>SSEF Silver Award (2025)</li>
-                        <li>Gold Award, C.B. Paul Memorial Science Quiz (2022)</li>
-                        <li>National School Games Triple Jump - 1st Position</li>
-                    </ul>
-
-                    <h2 class="text-xl font-semibold border-b mt-6">Research</h2>
-                    <p>Collaborated with NTU on Pectin-based hydrogels incorporating Silica Nanoparticles (2024).</p>
-                    
-                    <p class="mt-10 text-sm text-gray-400 text-center italic">This is a web-view for preview purposes. On your live site, this button will open your actual resume.pdf file.</p>
-                </body>
-                </html>
-            `;
-            
-            const win = window.open('', '_blank');
-            win.document.write(resumeContent);
-            win.document.close();
-        }
     </script>
 </body>
 </html>
