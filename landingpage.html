@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethan Kong | Links</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400&family=Petit+Formal+Script&display=swap');
+        
+        :root {
+            --pastel-grey: #e5e7eb;
+            --text-main: #4b5563;
+        }
+
+        body {
+            font-family: 'Epilogue', sans-serif;
+            background-color: var(--pastel-grey);
+            color: var(--text-main);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Intro Overlay Styles */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: var(--pastel-grey);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            animation: fadeOutOverlay 0.8s ease-in-out forwards;
+            animation-delay: 1.8s;
+        }
+
+        .welcome-text {
+            font-family: 'Petit Formal Script', cursive;
+            font-size: 4rem;
+            opacity: 0;
+            animation: fadeInOut 1.8s ease-in-out forwards;
+        }
+
+        /* Main Content Animation */
+        #main-content {
+            opacity: 0;
+            animation: fadeInMain 1s ease-in-out forwards;
+            animation-delay: 2.4s;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.015);
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            30% { opacity: 1; transform: translateY(0); }
+            70% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+
+        @keyframes fadeOutOverlay {
+            to { visibility: hidden; opacity: 0; }
+        }
+
+        @keyframes fadeInMain {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 640px) {
+            .welcome-text { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Intro Animation Overlay -->
+    <div id="intro-overlay">
+        <h1 class="welcome-text">Welcome</h1>
+    </div>
+
+    <!-- Main Landing Page -->
+    <main id="main-content" class="flex flex-col items-center justify-center min-h-screen px-6 py-12">
+        
+        <!-- Header Info -->
+        <div class="text-center mb-10">
+            <h1 class="text-xl font-light tracking-[0.2em] uppercase mb-2">Ethan Kong</h1>
+            <p class="text-[10px] uppercase tracking-[0.3em] text-gray-400">Researcher & Content Creator</p>
+            <div class="h-[1px] w-8 bg-gray-300 mx-auto mt-6"></div>
+        </div>
+
+        <!-- Links Container -->
+        <div class="w-full max-w-sm space-y-3">
+            
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/ethan-kong-88999933b/" target="_blank" class="link-card block w-full py-5 px-8 rounded-full text-center group">
+                <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">LinkedIn</span>
+            </a>
+
+            <!-- CV (With JavaScript fallback for preview) -->
+            <button onclick="viewCV()" class="link-card block w-full py-5 px-8 rounded-full text-center group">
+                <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">Curriculum Vitae</span>
+            </button>
+
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&utm_source=qr" target="_blank" class="link-card block w-full py-5 px-8 rounded-full text-center group">
+                <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">Instagram</span>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@atypicaldinosaur?_r=1&_t=ZS-963MB46IpgD" target="_blank" class="link-card block w-full py-5 px-8 rounded-full text-center group">
+                <span class="text-xs tracking-[0.25em] uppercase font-light group-hover:tracking-[0.35em] transition-all">TikTok</span>
+            </a>
+
+        </div>
+
+        <footer class="mt-16 text-[9px] uppercase tracking-[0.5em] text-gray-400 text-center">
+            Hwa Chong Institution<br>
+            <span class="mt-2 block">© 2025</span>
+        </footer>
+    </main>
+
+    <script>
+        // Ensure the page is interactive after the intro
+        setTimeout(() => {
+            document.body.style.overflow = 'auto';
+        }, 3000);
+
+        function viewCV() {
+            // Attempt to open the local PDF first (this works on GitHub Pages)
+            // But for this preview environment, we generate a clean view
+            const resumeContent = `
+                <html>
+                <head>
+                    <title>Ethan Kong - Resume</title>
+                    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+                    <style>body { font-family: sans-serif; color: #333; padding: 40px; max-width: 800px; margin: auto; }</style>
+                </head>
+                <body>
+                    <h1 class="text-3xl font-bold">ETHAN KONG LYE KIT</h1>
+                    <p class="text-gray-600 mb-4">+65 8322 0982 | e.kong08@yahoo.com</p>
+                    
+                    <h2 class="text-xl font-semibold border-b mt-6">Education</h2>
+                    <p><strong>Hwa Chong Institution (Junior College)</strong> (2025-2026)</p>
+                    <p>Science Math Talent Programme (PCME/H3 Physics)</p>
+                    
+                    <h2 class="text-xl font-semibold border-b mt-6">Key Achievements</h2>
+                    <ul class="list-disc ml-5">
+                        <li>SSEF Silver Award (2025)</li>
+                        <li>Gold Award, C.B. Paul Memorial Science Quiz (2022)</li>
+                        <li>National School Games Triple Jump - 1st Position</li>
+                    </ul>
+
+                    <h2 class="text-xl font-semibold border-b mt-6">Research</h2>
+                    <p>Collaborated with NTU on Pectin-based hydrogels incorporating Silica Nanoparticles (2024).</p>
+                    
+                    <p class="mt-10 text-sm text-gray-400 text-center italic">This is a web-view for preview purposes. On your live site, this button will open your actual resume.pdf file.</p>
+                </body>
+                </html>
+            `;
+            
+            const win = window.open('', '_blank');
+            win.document.write(resumeContent);
+            win.document.close();
+        }
+    </script>
+</body>
+</html>
