@@ -4,7 +4,38 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Ethan Kong | Links</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">window.addEventListener('DOMContentLoaded', () => {
+    const INTRO_DURATION = 3900; 
+
+    setTimeout(() => {
+        document.body.style.overflowY = 'auto';
+        
+        // Scroll Reveal logic
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Marquee replication
+        const marquees = document.querySelectorAll('.conveyor-belt-content');
+        marquees.forEach(m => {
+            const clone = m.innerHTML;
+            m.innerHTML = clone + clone;
+        });
+    }, INTRO_DURATION);
+});</script>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Epilogue:wght@300;400&family=Noto+Serif+SC:wght@700&family=Petit+Formal+Script&family=Zhi+Mang+Xing&display=swap');
         
@@ -18,7 +49,7 @@
             background-color: var(--holographic-bg);
             color: var(--text-main);
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -31,8 +62,7 @@
                 radial-gradient(circle at 10% 10%, rgba(153, 246, 228, 0.6) 0%, transparent 50%),
                 radial-gradient(circle at 90% 10%, rgba(251, 207, 232, 0.6) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(233, 213, 255, 0.6) 0%, transparent 50%),
-                url('{{DATA:IMAGE:IMAGE_1}}');
+                radial-gradient(circle at 80% 80%, rgba(233, 213, 255, 0.6) 0%, transparent 50%);
             background-size: cover;
             background-position: center;
             opacity: 0.4;
@@ -50,7 +80,7 @@
             justify-content: center;
             z-index: 50;
             animation: fadeOutOverlay 0.8s ease-in-out forwards;
-            animation-delay: 3.5s; /* Reduced from 5s */
+            animation-delay: 3.5s; 
         }
 
         .welcome-text {
@@ -62,7 +92,7 @@
             background: linear-gradient(135deg, #2dd4bf, #f472b6, #c084fc, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: floatUpDown 3s ease-in-out forwards; /* Reduced duration from 4.5s */
+            animation: floatUpDown 3s ease-in-out forwards;
         }
 
         .welcome-caption {
@@ -73,8 +103,8 @@
             background: linear-gradient(135deg, #2dd4bf, #f472b6, #c084fc, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: floatUpDown 3s ease-in-out forwards; /* Reduced duration from 4.5s */
-            animation-delay: 0.2s; /* Slightly tighter delay */
+            animation: floatUpDown 3s ease-in-out forwards;
+            animation-delay: 0.2s;
             margin-top: 1rem;
         }
 
@@ -121,6 +151,56 @@
             left: 100%;
         }
 
+        /* Summary Section Styling - Borderless */
+        .summary-card {
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            border-radius: 0;
+            padding: 32px 0;
+            margin-top: 48px;
+            width: 100%;
+        }
+
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #9ca3af;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+
+        /* Marquee Effect for Headings on Mobile */
+        @media (max-width: 640px) {
+            .marquee-container {
+                overflow: hidden;
+                white-space: nowrap;
+                width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                padding: 10px 0;
+                margin-bottom: 20px;
+            }
+            .marquee-content {
+                display: inline-block;
+                animation: marquee 15s linear infinite;
+            }
+            .section-label {
+                border-bottom: none;
+                margin-bottom: 0;
+                display: inline-block;
+                padding-right: 50px;
+            }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         @keyframes floatUpDown {
             0% { opacity: 0; transform: translateY(40px); }
             20% { opacity: 1; transform: translateY(0); }
@@ -137,65 +217,210 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .photo-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+            margin: 0 auto 1.5rem;
+        }
+        
+        .achievement-item-card {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        .achievement-item-card:hover {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .photo-accent {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+            border: 2px solid white;
+        }
+
         @media (max-width: 640px) {
             .welcome-text { font-size: 4.5rem; }
             .welcome-caption { font-size: 1.2rem; }
         }
+    
+        .conveyor-belt {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            overflow: hidden;
+            white-space: nowrap;
+            background: transparent;
+            padding: 20px 0;
+            margin-bottom: 2rem;
+        }
+        .conveyor-belt-content {
+            display: inline-block;
+            font-size: 5rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: rgba(0, 0, 0, 1);
+            animation: scroll-left 20s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 640px) {
+            .conveyor-belt-content { font-size: 3rem; }
+        }
     </style>
-</head>
+<style>
+    .scroll-reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .scroll-reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style></head>
 <body class="min-h-screen">
 <!-- Intro Animation Overlay -->
 <div class="flex-col" id="intro-overlay">
-<h1 class="welcome-text">恐龙城</h1>
-<p class="welcome-caption">Dinosaur City</p>
+<h1 class="welcome-text font-bold">恐龙城</h1>
+<p class="welcome-caption font-bold">Dinosaur City</p>
 </div>
 <!-- Main Landing Page -->
 <main class="flex flex-col items-center justify-center min-h-screen px-6 py-12 relative z-10" id="main-content">
 <!-- Header Info -->
-<div class="text-center mb-12 reveal" id="header-reveal">
+<div class="min-h-screen flex flex-col items-center justify-center w-full">
+<div class="text-center mb-12 reveal active" id="header-reveal">
 <h1 class="text-4xl font-light tracking-wide mb-4" style="font-family: 'Petit Formal Script', cursive;">Ethan Kong</h1>
 <p class="text-[10px] uppercase tracking-[0.35em] text-gray-500 font-medium">Researcher &amp; Content Creator</p>
 <div class="h-[1px] w-12 bg-gradient-to-r from-teal-200 via-pink-200 to-purple-200 mx-auto mt-8 opacity-60"></div>
 </div>
-<!-- Links Container -->
 <div class="w-full max-w-sm space-y-4">
-<!-- LinkedIn -->
-<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.linkedin.com/in/ethan-kong-88999933b/" style="animation-delay: 0.1s;" target="_blank">
+<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.linkedin.com/in/ethan-kong-88999933b/" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">LinkedIn</span>
 </a>
-<!-- CV -->
-<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="resume.pdf" style="animation-delay: 0.2s;" target="_blank">
+<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="resume.pdf" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">Curriculum Vitae</span>
 </a>
-<!-- Instagram -->
-<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&amp;utm_source=qr" style="animation-delay: 0.3s;" target="_blank">
+<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&amp;utm_source=qr" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">Instagram</span>
 </a>
-<!-- TikTok -->
-<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.tiktok.com/@atypicaldinosaur?_r=1&amp;_t=ZS-963MB46IpgD" style="animation-delay: 0.4s;" target="_blank">
+<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.tiktok.com/@atypicaldinosaur?_r=1&amp;_t=ZS-963MB46IpgD" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">TikTok</span>
 </a>
 </div>
-<footer class="mt-20 text-[9px] uppercase tracking-[0.5em] text-gray-400 text-center reveal" style="animation-delay: 0.6s;">
+</div>
+<!-- Links Container -->
+<!-- Achievements & Experience Section -->
+<div class="w-full max-w-lg space-y-16 mt-12">
+<!-- Major Achievements (Moved Above Research) -->
+<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.5s;">
+<div class="conveyor-belt"><div class="conveyor-belt-content">MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS </div></div>
+<div class="text-center mb-10">
+<img alt="Ethan Kong" class="photo-circle border-pink-200 shadow-pink-100" src="https://lh3.googleusercontent.com/aida/ADBb0ugAFcbbWomfY-3Ppye3EI00Z8VYokBMUCleMgnm5MB0L4NoHLb8ycA6MVZVtgG6XNDRW0DVczOP1MfsdNeOkdAb9NY-Q3BjkcSbsvbivcaJ5zgQ3hv1fQkcNNaI6SQR7WKaLkESUnk_xPFPwS4MhYmpXAQp1SzW-8HnLdsSgArpHHISjJbGjEoQd9pZV6q29CTQal8IVoaGc0R1AX5_ZQ7s8qaN8gti1faK95kq4R-n_Kns5S1znpsKe90nkJTKO4XUgPYGihJ1ow"/>
+</div>
+<div class="space-y-4">
+<div class="achievement-item-card">
+<p class="text-xl font-bold text-gray-800">SSEF Silver Award (2025)</p>
+<p class="text-xs text-gray-400 uppercase tracking-widest mt-1">Science &amp; Engineering</p>
+</div>
+<div class="achievement-item-card">
+<p class="text-xl font-bold text-gray-800">International Chemistry Quiz</p>
+<p class="text-sm text-purple-600 font-semibold">High Distinction (2024)</p>
+</div>
+<div class="achievement-item-card">
+<p class="text-xl font-bold text-gray-800">NSG Triple Jump</p>
+<p class="text-sm text-blue-600 font-semibold">Gold Medalist</p>
+</div>
+</div>
+</div>
+<!-- Research Journey -->
+<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.6s;">
+<div class="conveyor-belt"><div class="conveyor-belt-content">INTERNSHIPS INTERNSHIPS INTERNSHIPS INTERNSHIPS </div></div>
+<div class="text-center">
+<img alt="Research" class="photo-circle shadow-teal-100" src="https://lh3.googleusercontent.com/aida/ADBb0ujn5FkQkeSNZ8eJW1pnCNYu-Xf3tp4vooX9sHpR5W3KBJ65gV3OOxlFIKs3Z_URDuJtnbFd3Oa-PCAeI2X1t6ORiOTCGs-sjuSeXTXSrIZ7fuYcIsoXhSni0OUjUlbAybQ4QcL2pjftfTXW6o5Uwk1nabOiqh16z0OiVPAxNrpOeZoC3Pe5wNS-sYMv9rRd8EsTFRHrwIVvUSoOFRR0zNLz7KteAQ7iBB_RHKLYvxL0sRKfRYE0h7zbk8dZF0UmB3tIMIwjFpxe9A"/>
+<div class="relative px-4">
+<p class="text-xl font-bold text-gray-800">Nanyang Technological University</p>
+<p class="text-sm text-gray-500 mt-6 leading-relaxed max-w-md mx-auto">Collaborated on Pectin-based hydrogels and Silica Nanoparticles under Assoc Prof Sieren Lim.</p>
+</div>
+</div>
+</div>
+<!-- Expertise -->
+<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.7s;">
+<div class="conveyor-belt"><div class="conveyor-belt-content">TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE </div></div>
+<div class="flex items-center gap-6 mb-8 px-4">
+<img alt="Creative" class="photo-circle border-purple-200 shadow-purple-100 mb-8 block mx-auto" src="https://lh3.googleusercontent.com/aida/ADBb0uh6J71ZzDdxhgj563uyqX_VD__oTWI-tknBGyCjonp35euvKjoapmRTTxLvJtK7lsLmBR-GAQJP8R-otXpWFDlO6CSZ5cyl9qlznOH-NX1lSTk1Zk1RSHmcka7EavUYJnnq1yuAs8p-vMt8GBjgFjLh9pC827O9y65oONzEt15KJXaJYn9ABNm0IYt_3RnVQsDj6THigVrKlcyJdc73fZUtYAxSwG5PSZ-3j5sGsRwon_yLoTzKGR9pGW_DPaBsDoiUULjFZs1lbQ"/>
+<div>
+</div>
+</div>
+<div class="gap-3 px-4"><div class="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 w-full">
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Financial Modelling</span>
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">DaVinci Resolve</span>
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Team Leader</span>
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Data Analysis</span>
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Graphic Design</span>
+<span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Research Expertise</span>
+</div></div>
+</div>
+</div>
+<!-- Enlarged Chio Bu Photo -->
+<div class="reveal flex justify-center mt-20 scroll-reveal" style="animation-delay: 0.8s;">
+<div class="relative group">
+<div class="absolute inset-0 bg-gradient-to-tr from-teal-200/20 to-pink-200/20 blur-2xl rounded-[3rem] group-hover:scale-110 transition-transform duration-700"></div>
+<img alt="Ethan" class="w-64 h-80 sm:w-80 sm:h-[400px] rounded-[3rem] object-cover border-4 border-white/60 shadow-2xl relative z-10 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/ADBb0ugFGsE_R4mNZGjtlybfpu1Z-zhe5Ye_0qE3x-iO_rfdeYC5v1sv2Y_4m8XBlhEM0OF4OmPup-5N16iVrlHzaHTnfNrXsq-nSsi1WVFxxdhn8IsBvVSRkoBY3ibXSYhA84BoN6vMZZewYQyts5yoQK_4da7KPxMDoqTn0U07qZRMgANb3Ag2Ml8z_Qhu4APcXZNR8U9KvxcC0rhbE_Ickymy7wK202zsQK02fDCTycp6rSkke-mCZay_2cbi2AzU2DSdwfuvT3JrBQ"/>
+</div>
+</div>
+<footer class="mt-20 text-[9px] uppercase tracking-[0.5em] text-gray-400 text-center reveal scroll-reveal" style="animation-delay: 0.7s;">
             Hwa Chong Institution<br/>
 <span class="mt-3 block opacity-70">2026</span>
 </footer>
 </main>
-<script>
-        // Sequence the animations after the intro
-        window.addEventListener('DOMContentLoaded', () => {
-            const INTRO_DURATION = 3900; // Reduced from 6000 to match shorter CSS delays (3.5s delay + some of 0.8s fade)
+<script>window.addEventListener('DOMContentLoaded', () => {
+    const INTRO_DURATION = 3900; 
 
-            setTimeout(() => {
-                document.body.style.overflow = 'auto';
-                
-                const elements = document.querySelectorAll('.reveal');
-                elements.forEach((el, index) => {
-                    setTimeout(() => {
-                        el.classList.add('active');
-                    }, index * 100); // Slightly faster stagger
-                });
-            }, INTRO_DURATION);
+    setTimeout(() => {
+        document.body.style.overflowY = 'auto';
+        
+        // Scroll Reveal logic
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                } else {
+                    entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Marquee replication
+        const marquees = document.querySelectorAll('.conveyor-belt-content');
+        marquees.forEach(m => {
+            const clone = m.innerHTML;
+            m.innerHTML = clone + clone;
         });
-    </script>
+    }, INTRO_DURATION);
+});</script>
 </body></html>
