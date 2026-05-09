@@ -5,289 +5,301 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Ethan Kong | Links</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Epilogue:wght@300;400&family=Noto+Serif+SC:wght@200;700&family=Petit+Formal+Script&family=Zhi+Mang+Xing&display=swap');
-        
-        :root {
-            --holographic-bg: #f8fafc;
-            --text-main: #4b5563;
+<style>@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Epilogue:wght@300;400&family=Noto+Serif+SC:wght@200;700&family=Petit+Formal+Script&family=Zhi+Mang+Xing&display=swap");
+:root {
+    --holographic-bg: #f8fafc;
+    --text-main: #4b5563
+    }
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--holographic-bg);
+    color: var(--text-main);
+    margin: 0;
+    overflow-x: hidden;
+    position: relative
+    }
+/* Iridescent Background Effect */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 10% 10%, rgba(153, 246, 228, 0.6) 0%, transparent 50%), radial-gradient(circle at 90% 10%, rgba(251, 207, 232, 0.6) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.4) 0%, transparent 60%), radial-gradient(circle at 80% 80%, rgba(233, 213, 255, 0.6) 0%, transparent 50%);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    filter: blur(40px);
+    z-index: -1
+    }
+/* Intro Overlay Styles */
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    animation: fadeOutOverlay 0.8s ease-in-out forwards;
+    animation-delay: 3.5s;
+    overflow: hidden;
+    pointer-events: none
+    }
+#intro-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: white;
+    z-index: 0;
+    animation: fadeOutOverlay 0.8s ease-in-out forwards;
+    animation-delay: 3.5s
+    }
+.welcome-text {
+    font-family: "Zhi Mang Xing", cursive;
+    font-size: 15rem;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    color: #fff;
+    animation: characterCascading 3.5s ease-in-out forwards;
+    z-index: 102;
+    position: relative;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center
+    }
+/* River Graphic Container - Full Viewport Width */
+.river-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 100vw;
+    /* Full width to envelop character */
+    height: 100%;
+    z-index: 101;
+    overflow: hidden;
+    background: transparent
+    }
+.painterly-river {
+    width: 100%;
+    height: 100%;
+    background-image: url(painterly_river.png);
+    background-size: cover;
+    /* Ensures texture covers the wide container */
+    background-position: center 0%;
+    background-color: transparent;
+    opacity: 1;
+    clip-path: inset(0 0 100% 0);
+    animation: riverFlowIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.2s, riverTextureFlow 10s linear infinite, riverDrainOut 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 3s
+    }
+@keyframes riverFlowIn {
+    0% {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+        } 100% {
+        clip-path: inset(0 0 0% 0);
+        opacity: 1;
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--holographic-bg);
-            color: var(--text-main);
-            margin: 0;
-            overflow-x: hidden;
-            position: relative;
+    }
+@keyframes riverTextureFlow {
+    0% {
+        background-position: center 0%;
+        } 100% {
+        background-position: center 100%;
         }
-
-        /* Iridescent Background Effect */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(153, 246, 228, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 90% 10%, rgba(251, 207, 232, 0.6) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(233, 213, 255, 0.6) 0%, transparent 50%);
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
-            filter: blur(40px);
-            z-index: -1;
+    }
+@keyframes riverDrainOut {
+    0% {
+        clip-path: inset(0 0 0 0);
+        opacity: 1;
+        } 100% {
+        clip-path: inset(100% 0 0 0);
+        opacity: 0;
         }
-
-        /* Intro Overlay Styles */
-        #intro-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            animation: fadeOutOverlay 0.8s ease-in-out forwards;
-            animation-delay: 3.5s; 
-            overflow: hidden;
-            pointer-events: none;
+    }
+@keyframes characterCascading {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.9);
+        } 20% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        } 80% {
+        opacity: 1;
+        transform: translateY(0);
+        } 95% {
+        opacity: 0;
+        transform: translateY(100px);
+        } 100% {
+        opacity: 0;
+        transform: translateY(120px);
         }
-
-        #intro-overlay::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: white;
-            z-index: 0;
-            animation: fadeOutOverlay 0.8s ease-in-out forwards;
-            animation-delay: 3.5s;
+    }
+.reveal {
+    opacity: 0;
+    transform: translatey(20px)
+    }
+.reveal.active {
+    animation: fadeInFloatUp 1s ease-out forwards
+    }
+.link-card {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(16px);
+    position: relative;
+    overflow: hidden
+    }
+.link-card::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(45deg);
+    transition: 0.6s;
+    pointer-events: none
+    }
+.link-card:hover {
+    background: rgba(255, 255, 255, 0.7);
+    transform: translatey(-2px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05)
+    }
+.link-card:hover::after {
+    left: 100%
+    }
+.summary-card {
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    border-radius: 0;
+    padding: 32px 0;
+    margin-top: 48px;
+    width: 100%
+    }
+@keyframes fadeOutOverlay {
+    to {
+        visibility: hidden;
+        opacity: 0;
         }
-
-        .welcome-text {
-            font-family: 'Zhi Mang Xing', cursive; 
-            font-size: 15rem;
-            letter-spacing: 0.1em;
-            opacity: 0;
-            color: #ffffff;
-            animation: characterCascading 3.5s ease-in-out forwards;
-            z-index: 102;
-            position: relative;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
+    }
+@keyframes fadeInFloatUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        } to {
+        opacity: 1;
+        transform: translateY(0);
         }
-
-        /* River Graphic Container - Full Viewport Width */
-        .river-container {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw; /* Full width to envelop character */
-            height: 100%;
-            z-index: 101;
-            overflow: hidden;
-            background: transparent;
+    }
+.photo-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+    margin: 0 auto 1.5rem
+    }
+.achievement-item-card {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(8px)
+    }
+.achievement-item-card:hover {
+    transform: scale(1.03);
+    background: rgba(255, 255, 255, 0.5)
+    }
+.conveyor-belt {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    white-space: nowrap;
+    background: transparent;
+    padding: 20px 0;
+    margin-bottom: 2rem
+    }
+.conveyor-belt-content {
+    display: inline-block;
+    font-size: 5rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: rgba(0, 0, 0, 1);
+    animation: scroll-left 20s linear infinite
+    }
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+        } 100% {
+        transform: translateX(-50%);
         }
-
-        .painterly-river {
-            width: 100%;
-            height: 100%;
-            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWleOq0mXgjopZeafd-8fK8JBHrkvxEjiEogotMX9SjkkIkJiSTq434zsUw8GVJoyAIqnV_4MHzqLRPnPuwMyKnzSGpWwOL8XUeqJuGrzHKR5mvRZExRPf3wq0-A8lpbUKWr-ZcEDSQ5azdJwgu0fXjU7DyR1gaIb16TQKwg_iApyPMlCqL_QB0Ajkrnz2IyDE2XzznrSYhKRn7-9hHH9w8YmMKTE7Qgd33jp4rdFwMqTGwNEuxhx2VIbqNshByJ1sgQizGEfIlNk');
-            background-size: cover; /* Ensures texture covers the wide container */
-            background-position: center 0%;
-            background-color: transparent;
-            opacity: 1;
-            clip-path: inset(0 0 100% 0);
-            animation: 
-                riverFlowIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.2s, 
-                riverTextureFlow 10s linear infinite,
-                riverDrainOut 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 3.0s;
+    }
+@media (max-width: 640px) {
+    .conveyor-belt-content {
+        font-size: 3rem
         }
-
-        @keyframes riverFlowIn {
-            0% { clip-path: inset(0 0 100% 0); opacity: 0; }
-            100% { clip-path: inset(0 0 0% 0); opacity: 1; }
+    .welcome-text {
+        font-size: 12rem
         }
-
-        @keyframes riverTextureFlow {
-            0% { background-position: center 0%; }
-            100% { background-position: center 100%; }
+    .river-container {
+        width: 100vw
         }
-
-        @keyframes riverDrainOut {
-            0% { clip-path: inset(0 0 0 0); opacity: 1; }
-            100% { clip-path: inset(100% 0 0 0); opacity: 0; }
+    }
+.scroll-reveal {
+    opacity: 0;
+    transform: translatey(40px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1)
+    }
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translatey(0)
+    }
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+        } 40% {
+        transform: translateY(-8px);
+        } 60% {
+        transform: translateY(-4px);
         }
-
-        @keyframes characterCascading {
-            0% { opacity: 0; transform: translateY(-100px) scale(0.9); }
-            20% { opacity: 1; transform: translateY(0) scale(1); } 
-            80% { opacity: 1; transform: translateY(0); }
-            95% { opacity: 0; transform: translateY(100px); }
-            100% { opacity: 0; transform: translateY(120px); }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .reveal.active {
-            animation: fadeInFloatUp 1s ease-out forwards;
-        }
-
-        .link-card {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            backdrop-filter: blur(16px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: rotate(45deg);
-            transition: 0.6s;
-            pointer-events: none;
-        }
-
-        .link-card:hover {
-            background: rgba(255, 255, 255, 0.7);
-            transform: translateY(-2px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
-        }
-
-        .link-card:hover::after {
-            left: 100%;
-        }
-
-        .summary-card {
-            background: transparent;
-            border: none;
-            backdrop-filter: none;
-            border-radius: 0;
-            padding: 32px 0;
-            margin-top: 48px;
-            width: 100%;
-        }
-
-        @keyframes fadeOutOverlay {
-            to { visibility: hidden; opacity: 0; }
-        }
-
-        @keyframes fadeInFloatUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .photo-circle {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
-            margin: 0 auto 1.5rem;
-        }
-        
-        .achievement-item-card {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 0.75rem;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-        .achievement-item-card:hover {
-            transform: scale(1.03);
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .conveyor-belt {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            overflow: hidden;
-            white-space: nowrap;
-            background: transparent;
-            padding: 20px 0;
-            margin-bottom: 2rem;
-        }
-        .conveyor-belt-content {
-            display: inline-block;
-            font-size: 5rem;
-            font-weight: 900;
-            font-style: italic;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-            color: rgba(0, 0, 0, 1);
-            animation: scroll-left 20s linear infinite;
-        }
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        @media (max-width: 640px) {
-            .conveyor-belt-content { font-size: 3rem; }
-            .welcome-text { font-size: 12rem; }
-            .river-container { width: 100vw; }
-        }
-
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-8px);}
-            60% {transform: translateY(-4px);}
-        }
-        #scroll-indicator {
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            visibility: hidden;
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-            pointer-events: none;
-        }
-        #scroll-indicator.visible {
-            opacity: 1;
-            visibility: visible;
-            animation: bounce 2s infinite;
-        }
-    </style>
+    }
+#scroll-indicator {
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    pointer-events: none
+    }
+#scroll-indicator.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: bounce 2s infinite
+    }</style>
 </head>
 <body class="min-h-screen overflow-hidden">
 <!-- Intro Animation Overlay -->
@@ -326,7 +338,7 @@
 <div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS </div></div>
 <div class="text-center mb-10">
-<img alt="Ethan Kong" class="photo-circle border-pink-200 shadow-pink-100" src="https://lh3.googleusercontent.com/aida/ADBb0ujZU8rKpTXvxlt_yYHWGvWhMyReyGFmJ046kVJ56JQ_6XqziM5M7LFmHjsI-XYHQuLY0QWio8y09Dif-ZfLB3C2b-pMojm4yg8Q6fnnHY8OU2QCsT5S0DZJ4ebbKbh8Bx8dPNosx_RCISpcocRKo9O51m0tNDl0pK3ZraE9qBH4_BL5_XZal_tCZfQpbbpuaKxOScOqLchuOdtZp7DqUzgHbzhHMuxUaIYizH3mkV8Qs3OM22lusZdVp_PqVyRNvqopn3xb7S14GQ"/>
+<img alt="Ethan Kong" class="photo-circle border-pink-200 shadow-pink-100" src="profile_photo.jpeg"/>
 </div>
 <div class="space-y-4">
 <div class="achievement-item-card">
@@ -346,7 +358,7 @@
 <div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">INTERNSHIPS INTERNSHIPS INTERNSHIPS INTERNSHIPS </div></div>
 <div class="text-center">
-<img alt="Research" class="photo-circle shadow-teal-100" src="https://lh3.googleusercontent.com/aida/ADBb0uj2Oe8imRihqV4meBb9g3bfiB4nlS4zqVesjp8g-UGHolTupitcTb0CcMZmoNHKFptMKfVABe7zWzeJm8Lx_0xpi4341-RCsoFhXM9DNL2r82_S3oZhfYJuaGb6Nbtoh9LUVdyPKYyYqGi8kadYaagcLTBut-5almsj0WH_ziXJdXiz2KaBpicp0JS2G0NolTUamALyNaVjltSY-I6MbTgFZhofWxGn1bjPTMF8zMSRc5R5hg5WF9kNorTx1svO3RigE4zE3UH1Qg"/>
+<img alt="Research" class="photo-circle shadow-teal-100" src="research_photo.jpeg"/>
 <div class="relative px-4">
 <p class="text-xl font-bold text-gray-800">Nanyang Technological University</p>
 <p class="text-sm text-gray-500 mt-6 leading-relaxed max-w-md mx-auto">Collaborated on Pectin-based hydrogels and Silica Nanoparticles under Assoc Prof Sieren Lim.</p>
@@ -356,7 +368,7 @@
 <div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE </div></div>
 <div class="flex items-center gap-6 mb-8 px-4">
-<img alt="Creative" class="photo-circle border-purple-200 shadow-purple-100 mb-8 block mx-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugrDYJaM-Bbkd4Ll6TOSzgZhOidOnPDaX1F6SxXBf62wrmPQfH4U9smxzLcnWaesYSg0yFjEhqPj2xNLbfYCRrpO7bzn0S8hE__SrxbcEJIhQsVrFOArHMAh-eKe_fAnW2PtqHM33oGp7CeLm_0UlwO5HNxa0jxLxZEhkZ4fDDs77zS6Qv_gtJ0iyI-oSw-nyNKGScOrO-9PM6KWbUTPGyB89VDQm6y10YcB0I6saOgkT0N6ND0cpqlHW_PCERD9SNQtsmXYHKD5g"/>
+<img alt="Creative" class="photo-circle border-purple-200 shadow-purple-100 mb-8 block mx-auto" src="creative_photo.jpeg"/>
 </div>
 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 w-full">
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Financial Modelling</span>
@@ -372,7 +384,7 @@
 <div class="reveal flex justify-center mt-20 scroll-reveal">
 <div class="relative group">
 <div class="absolute inset-0 bg-gradient-to-tr from-teal-200/20 to-pink-200/20 blur-2xl rounded-[3rem] group-hover:scale-110 transition-transform duration-700"></div>
-<img alt="Ethan" class="w-64 h-80 sm:w-80 sm:h-[400px] rounded-[3rem] object-cover border-4 border-white/60 shadow-2xl relative z-10 transition-transform duration-500 aspect-[4/5]" src="https://lh3.googleusercontent.com/aida/ADBb0uh4EUTb_2uq9FdE6zc0iTErkDxW_BDCcP5OPaRT9acriqoeuRiOy7JCrWn1BvCLIiLrSXPLLti0BJDrzfhs8Xvw1qHHikrZ_DZ-E6A2sqnnDo5mGz7wSuA09Up4a9Ge3XvoZ6I8yT3WgYmrK6BmIPIYmi4S7v9QgkE-c0iPODzWaY9KjDeKqRQ6dBpzwFxJFlw-G6ICecE9mz7HxBNuYIZx-9D_hvLpooxf8joM9dKdJGkm_U17rw9EfSan8nAia8otwUFfvTuPrw"/>
+<img alt="Ethan" class="w-64 h-80 sm:w-80 sm:h-[400px] rounded-[3rem] object-cover border-4 border-white/60 shadow-2xl relative z-10 transition-transform duration-500 aspect-[4/5]" src="featured_photo.jpeg"/>
 </div>
 </div>
 <footer class="mt-20 text-[10px] uppercase tracking-[0.5em] text-gray-400 text-center reveal scroll-reveal pb-12">
