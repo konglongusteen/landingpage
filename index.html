@@ -4,18 +4,9 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Ethan Kong | Links</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries">window.addEventListener('scroll', () => {
-        const indicator = document.getElementById('scroll-indicator');
-        if (!indicator) return;
-        if (window.scrollY > 50) {
-            indicator.style.opacity = '0';
-            indicator.style.pointerEvents = 'none';
-        } else if (indicator.classList.contains('visible')) {
-            indicator.style.opacity = '1';
-        }
-    });</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Epilogue:wght@300;400&family=Noto+Serif+SC:wght@700&family=Petit+Formal+Script&family=Zhi+Mang+Xing&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Epilogue:wght@300;400&family=Noto+Serif+SC:wght@200;700&family=Petit+Formal+Script&family=Zhi+Mang+Xing&display=swap');
         
         :root {
             --holographic-bg: #f8fafc;
@@ -52,41 +43,92 @@
         #intro-overlay {
             position: fixed;
             inset: 0;
-            background-color: #ffffff;
+            background-color: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 50;
+            z-index: 100;
             animation: fadeOutOverlay 0.8s ease-in-out forwards;
             animation-delay: 3.5s; 
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        #intro-overlay::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: white;
+            z-index: 0;
+            animation: fadeOutOverlay 0.8s ease-in-out forwards;
+            animation-delay: 3.5s;
         }
 
         .welcome-text {
-            font-family: 'Zhi Mang Xing', cursive;
-            font-weight: 400;
-            font-size: 6rem;
+            font-family: 'Zhi Mang Xing', cursive; 
+            font-size: 15rem;
             letter-spacing: 0.1em;
             opacity: 0;
-            background: linear-gradient(135deg, #2dd4bf, #f472b6, #c084fc, #fbbf24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: floatUpDown 3s ease-in-out forwards;
+            color: #ffffff;
+            animation: characterCascading 3.5s ease-in-out forwards;
+            z-index: 102;
+            position: relative;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        .welcome-caption {
-            font-family: 'Petit Formal Script', cursive;
-            font-size: 1.5rem;
-            letter-spacing: 0.2em;
-            opacity: 0;
-            background: linear-gradient(135deg, #2dd4bf, #f472b6, #c084fc, #fbbf24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: floatUpDown 3s ease-in-out forwards;
-            animation-delay: 0.2s;
-            margin-top: 1rem;
+        /* River Graphic Container - Full Viewport Width */
+        .river-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw; /* Full width to envelop character */
+            height: 100%;
+            z-index: 101;
+            overflow: hidden;
+            background: transparent;
         }
 
-        /* Main Content Animation */
+        .painterly-river {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWleOq0mXgjopZeafd-8fK8JBHrkvxEjiEogotMX9SjkkIkJiSTq434zsUw8GVJoyAIqnV_4MHzqLRPnPuwMyKnzSGpWwOL8XUeqJuGrzHKR5mvRZExRPf3wq0-A8lpbUKWr-ZcEDSQ5azdJwgu0fXjU7DyR1gaIb16TQKwg_iApyPMlCqL_QB0Ajkrnz2IyDE2XzznrSYhKRn7-9hHH9w8YmMKTE7Qgd33jp4rdFwMqTGwNEuxhx2VIbqNshByJ1sgQizGEfIlNk');
+            background-size: cover; /* Ensures texture covers the wide container */
+            background-position: center 0%;
+            background-color: transparent;
+            opacity: 1;
+            clip-path: inset(0 0 100% 0);
+            animation: 
+                riverFlowIn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards 0.2s, 
+                riverTextureFlow 10s linear infinite,
+                riverDrainOut 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards 3.0s;
+        }
+
+        @keyframes riverFlowIn {
+            0% { clip-path: inset(0 0 100% 0); opacity: 0; }
+            100% { clip-path: inset(0 0 0% 0); opacity: 1; }
+        }
+
+        @keyframes riverTextureFlow {
+            0% { background-position: center 0%; }
+            100% { background-position: center 100%; }
+        }
+
+        @keyframes riverDrainOut {
+            0% { clip-path: inset(0 0 0 0); opacity: 1; }
+            100% { clip-path: inset(100% 0 0 0); opacity: 0; }
+        }
+
+        @keyframes characterCascading {
+            0% { opacity: 0; transform: translateY(-100px) scale(0.9); }
+            20% { opacity: 1; transform: translateY(0) scale(1); } 
+            80% { opacity: 1; transform: translateY(0); }
+            95% { opacity: 0; transform: translateY(100px); }
+            100% { opacity: 0; transform: translateY(120px); }
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -129,7 +171,6 @@
             left: 100%;
         }
 
-        /* Summary Section Styling - Borderless */
         .summary-card {
             background: transparent;
             border: none;
@@ -138,52 +179,6 @@
             padding: 32px 0;
             margin-top: 48px;
             width: 100%;
-        }
-
-        .section-label {
-            font-size: 10px;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: #9ca3af;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-bottom: 8px;
-            margin-bottom: 20px;
-            display: block;
-            text-align: center;
-        }
-
-        /* Marquee Effect for Headings on Mobile */
-        @media (max-width: 640px) {
-            .marquee-container {
-                overflow: hidden;
-                white-space: nowrap;
-                width: 100vw;
-                margin-left: calc(-50vw + 50%);
-                padding: 10px 0;
-                margin-bottom: 20px;
-            }
-            .marquee-content {
-                display: inline-block;
-                animation: marquee 15s linear infinite;
-            }
-            .section-label {
-                border-bottom: none;
-                margin-bottom: 0;
-                display: inline-block;
-                padding-right: 50px;
-            }
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        @keyframes floatUpDown {
-            0% { opacity: 0; transform: translateY(40px); }
-            20% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-40px); }
         }
 
         @keyframes fadeOutOverlay {
@@ -218,20 +213,7 @@
             transform: scale(1.03);
             background: rgba(255, 255, 255, 0.5);
         }
-        .photo-accent {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            object-fit: cover;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.05);
-            border: 2px solid white;
-        }
 
-        @media (max-width: 640px) {
-            .welcome-text { font-size: 4.5rem; }
-            .welcome-caption { font-size: 1.2rem; }
-        }
-    
         .conveyor-belt {
             width: 100vw;
             position: relative;
@@ -261,64 +243,90 @@
         }
         @media (max-width: 640px) {
             .conveyor-belt-content { font-size: 3rem; }
+            .welcome-text { font-size: 12rem; }
+            .river-container { width: 100vw; }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-8px);}
+            60% {transform: translateY(-4px);}
+        }
+        #scroll-indicator {
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            pointer-events: none;
+        }
+        #scroll-indicator.visible {
+            opacity: 1;
+            visibility: visible;
+            animation: bounce 2s infinite;
         }
     </style>
-<style>
-    .scroll-reveal {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .scroll-reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
-</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-        40% {transform: translateY(-8px);}
-        60% {transform: translateY(-4px);}
-    }
-    #scroll-indicator {
-        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }</style></head>
-<body class="min-h-screen">
+</head>
+<body class="min-h-screen overflow-hidden">
 <!-- Intro Animation Overlay -->
-<div class="flex-col" id="intro-overlay">
-<h1 class="welcome-text font-bold">恐龙城</h1>
-<p class="welcome-caption font-bold">Dinosaur City</p>
+<div id="intro-overlay">
+<div class="river-container">
+<div class="painterly-river"></div>
+</div>
+<h1 class="welcome-text">江</h1>
 </div>
 <!-- Main Landing Page -->
 <main class="flex flex-col items-center justify-center min-h-screen px-6 py-12 relative z-10" id="main-content">
 <!-- Header Info -->
 <div class="min-h-screen flex flex-col items-center justify-center w-full">
-<div class="text-center mb-12 reveal active" id="header-reveal">
+<div class="text-center mb-12 reveal" id="header-reveal">
 <h1 class="text-4xl font-light tracking-wide mb-4" style="font-family: 'Petit Formal Script', cursive;">Ethan Kong</h1>
 <p class="text-[10px] uppercase tracking-[0.35em] text-gray-500 font-medium">Researcher &amp; Content Creator</p>
 <div class="h-[1px] w-12 bg-gradient-to-r from-teal-200 via-pink-200 to-purple-200 mx-auto mt-8 opacity-60"></div>
 </div>
-<div class="w-full max-w-sm space-y-4">
-<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.linkedin.com/in/ethan-kong-88999933b/" target="_blank">
+<div class="w-full max-sm:max-w-[320px] max-w-sm space-y-4">
+<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.linkedin.com/in/ethan-kong-88999933b/" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">LinkedIn</span>
 </a>
-<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="resume.pdf" target="_blank">
+<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="resume.pdf" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">Curriculum Vitae</span>
 </a>
-<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&amp;utm_source=qr" target="_blank">
+<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.instagram.com/atypicaldinosaur?igsh=MWpyam5wZHJoOXh1ZQ%3D%3D&amp;utm_source=qr" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">Instagram</span>
 </a>
-<a class="link-card reveal active block w-full py-5 px-8 rounded-full text-center group" href="https://www.tiktok.com/@atypicaldinosaur?_r=1&amp;_t=ZS-963MB46IpgD" target="_blank">
+<a class="link-card reveal block w-full py-5 px-8 rounded-full text-center group" href="https://www.tiktok.com/@atypicaldinosaur?_r=1&amp;_t=ZS-963MB46IpgD" target="_blank">
 <span class="text-base tracking-[0.2em] uppercase font-semibold text-black group-hover:tracking-[0.3em] transition-all">TikTok</span>
 </a>
 </div>
 </div>
-<!-- Links Container -->
 <!-- Achievements & Experience Section -->
 <div class="w-full max-w-lg space-y-16 mt-12">
-<!-- Major Achievements (Moved Above Research) -->
-<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.5s;">
+<div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS MAJOR ACHIEVEMENTS </div></div>
 <div class="text-center mb-10">
-<img alt="Ethan Kong" class="photo-circle border-pink-200 shadow-pink-100" src="https://lh3.googleusercontent.com/aida/ADBb0ugAFcbbWomfY-3Ppye3EI00Z8VYokBMUCleMgnm5MB0L4NoHLb8ycA6MVZVtgG6XNDRW0DVczOP1MfsdNeOkdAb9NY-Q3BjkcSbsvbivcaJ5zgQ3hv1fQkcNNaI6SQR7WKaLkESUnk_xPFPwS4MhYmpXAQp1SzW-8HnLdsSgArpHHISjJbGjEoQd9pZV6q29CTQal8IVoaGc0R1AX5_ZQ7s8qaN8gti1faK95kq4R-n_Kns5S1znpsKe90nkJTKO4XUgPYGihJ1ow"/>
+<img alt="Ethan Kong" class="photo-circle border-pink-200 shadow-pink-100" src="https://lh3.googleusercontent.com/aida/ADBb0ujZU8rKpTXvxlt_yYHWGvWhMyReyGFmJ046kVJ56JQ_6XqziM5M7LFmHjsI-XYHQuLY0QWio8y09Dif-ZfLB3C2b-pMojm4yg8Q6fnnHY8OU2QCsT5S0DZJ4ebbKbh8Bx8dPNosx_RCISpcocRKo9O51m0tNDl0pK3ZraE9qBH4_BL5_XZal_tCZfQpbbpuaKxOScOqLchuOdtZp7DqUzgHbzhHMuxUaIYizH3mkV8Qs3OM22lusZdVp_PqVyRNvqopn3xb7S14GQ"/>
 </div>
 <div class="space-y-4">
 <div class="achievement-item-card">
@@ -335,93 +343,92 @@
 </div>
 </div>
 </div>
-<!-- Research Journey -->
-<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.6s;">
+<div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">INTERNSHIPS INTERNSHIPS INTERNSHIPS INTERNSHIPS </div></div>
 <div class="text-center">
-<img alt="Research" class="photo-circle shadow-teal-100" src="https://lh3.googleusercontent.com/aida/ADBb0ujn5FkQkeSNZ8eJW1pnCNYu-Xf3tp4vooX9sHpR5W3KBJ65gV3OOxlFIKs3Z_URDuJtnbFd3Oa-PCAeI2X1t6ORiOTCGs-sjuSeXTXSrIZ7fuYcIsoXhSni0OUjUlbAybQ4QcL2pjftfTXW6o5Uwk1nabOiqh16z0OiVPAxNrpOeZoC3Pe5wNS-sYMv9rRd8EsTFRHrwIVvUSoOFRR0zNLz7KteAQ7iBB_RHKLYvxL0sRKfRYE0h7zbk8dZF0UmB3tIMIwjFpxe9A"/>
+<img alt="Research" class="photo-circle shadow-teal-100" src="https://lh3.googleusercontent.com/aida/ADBb0uj2Oe8imRihqV4meBb9g3bfiB4nlS4zqVesjp8g-UGHolTupitcTb0CcMZmoNHKFptMKfVABe7zWzeJm8Lx_0xpi4341-RCsoFhXM9DNL2r82_S3oZhfYJuaGb6Nbtoh9LUVdyPKYyYqGi8kadYaagcLTBut-5almsj0WH_ziXJdXiz2KaBpicp0JS2G0NolTUamALyNaVjltSY-I6MbTgFZhofWxGn1bjPTMF8zMSRc5R5hg5WF9kNorTx1svO3RigE4zE3UH1Qg"/>
 <div class="relative px-4">
 <p class="text-xl font-bold text-gray-800">Nanyang Technological University</p>
 <p class="text-sm text-gray-500 mt-6 leading-relaxed max-w-md mx-auto">Collaborated on Pectin-based hydrogels and Silica Nanoparticles under Assoc Prof Sieren Lim.</p>
 </div>
 </div>
 </div>
-<!-- Expertise -->
-<div class="summary-card reveal w-full scroll-reveal" style="animation-delay: 0.7s;">
+<div class="summary-card reveal w-full scroll-reveal">
 <div class="conveyor-belt"><div class="conveyor-belt-content">TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE TECHNICAL &amp; CREATIVE </div></div>
 <div class="flex items-center gap-6 mb-8 px-4">
-<img alt="Creative" class="photo-circle border-purple-200 shadow-purple-100 mb-8 block mx-auto" src="https://lh3.googleusercontent.com/aida/ADBb0uh6J71ZzDdxhgj563uyqX_VD__oTWI-tknBGyCjonp35euvKjoapmRTTxLvJtK7lsLmBR-GAQJP8R-otXpWFDlO6CSZ5cyl9qlznOH-NX1lSTk1Zk1RSHmcka7EavUYJnnq1yuAs8p-vMt8GBjgFjLh9pC827O9y65oONzEt15KJXaJYn9ABNm0IYt_3RnVQsDj6THigVrKlcyJdc73fZUtYAxSwG5PSZ-3j5sGsRwon_yLoTzKGR9pGW_DPaBsDoiUULjFZs1lbQ"/>
-<div>
+<img alt="Creative" class="photo-circle border-purple-200 shadow-purple-100 mb-8 block mx-auto" src="https://lh3.googleusercontent.com/aida/ADBb0ugrDYJaM-Bbkd4Ll6TOSzgZhOidOnPDaX1F6SxXBf62wrmPQfH4U9smxzLcnWaesYSg0yFjEhqPj2xNLbfYCRrpO7bzn0S8hE__SrxbcEJIhQsVrFOArHMAh-eKe_fAnW2PtqHM33oGp7CeLm_0UlwO5HNxa0jxLxZEhkZ4fDDs77zS6Qv_gtJ0iyI-oSw-nyNKGScOrO-9PM6KWbUTPGyB89VDQm6y10YcB0I6saOgkT0N6ND0cpqlHW_PCERD9SNQtsmXYHKD5g"/>
 </div>
-</div>
-<div class="gap-3 px-4"><div class="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 w-full">
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 px-4 w-full">
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Financial Modelling</span>
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">DaVinci Resolve</span>
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Team Leader</span>
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Data Analysis</span>
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Graphic Design</span>
 <span class="text-sm py-4 px-2 flex items-center justify-center text-center bg-white/40 border border-white/60 rounded-full text-gray-700 font-semibold backdrop-blur-md min-h-[60px]">Research Expertise</span>
-</div></div>
 </div>
 </div>
-<!-- Enlarged Chio Bu Photo -->
-<div class="reveal flex justify-center mt-20 scroll-reveal" style="animation-delay: 0.8s;">
+</div>
+<!-- Featured Photo -->
+<div class="reveal flex justify-center mt-20 scroll-reveal">
 <div class="relative group">
 <div class="absolute inset-0 bg-gradient-to-tr from-teal-200/20 to-pink-200/20 blur-2xl rounded-[3rem] group-hover:scale-110 transition-transform duration-700"></div>
-<img alt="Ethan" class="w-64 h-80 sm:w-80 sm:h-[400px] rounded-[3rem] object-cover border-4 border-white/60 shadow-2xl relative z-10 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/ADBb0ugFGsE_R4mNZGjtlybfpu1Z-zhe5Ye_0qE3x-iO_rfdeYC5v1sv2Y_4m8XBlhEM0OF4OmPup-5N16iVrlHzaHTnfNrXsq-nSsi1WVFxxdhn8IsBvVSRkoBY3ibXSYhA84BoN6vMZZewYQyts5yoQK_4da7KPxMDoqTn0U07qZRMgANb3Ag2Ml8z_Qhu4APcXZNR8U9KvxcC0rhbE_Ickymy7wK202zsQK02fDCTycp6rSkke-mCZay_2cbi2AzU2DSdwfuvT3JrBQ"/>
+<img alt="Ethan" class="w-64 h-80 sm:w-80 sm:h-[400px] rounded-[3rem] object-cover border-4 border-white/60 shadow-2xl relative z-10 transition-transform duration-500 aspect-[4/5]" src="https://lh3.googleusercontent.com/aida/ADBb0uh4EUTb_2uq9FdE6zc0iTErkDxW_BDCcP5OPaRT9acriqoeuRiOy7JCrWn1BvCLIiLrSXPLLti0BJDrzfhs8Xvw1qHHikrZ_DZ-E6A2sqnnDo5mGz7wSuA09Up4a9Ge3XvoZ6I8yT3WgYmrK6BmIPIYmi4S7v9QgkE-c0iPODzWaY9KjDeKqRQ6dBpzwFxJFlw-G6ICecE9mz7HxBNuYIZx-9D_hvLpooxf8joM9dKdJGkm_U17rw9EfSan8nAia8otwUFfvTuPrw"/>
 </div>
 </div>
-<footer class="mt-20 text-[9px] uppercase tracking-[0.5em] text-gray-400 text-center reveal scroll-reveal" style="animation-delay: 0.7s;">
-            Hwa Chong Institution<br/>
-<span class="mt-3 block opacity-70">2026</span>
+<footer class="mt-20 text-[10px] uppercase tracking-[0.5em] text-gray-400 text-center reveal scroll-reveal pb-12">
+        Hwa Chong Institution<br/>
+<span class="mt-3 block font-bold text-gray-600">Dinosaur City</span>
+<span class="mt-1 block opacity-70">2026</span>
 </footer>
 </main>
-<script>window.addEventListener('DOMContentLoaded', () => {
-    const INTRO_DURATION = 3900; 
+<!-- Scroll Indicator -->
+<div id="scroll-indicator">
+<svg fill="none" height="32" viewbox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5V19M12 19L19 12M12 19L5 12" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const INTRO_DURATION = 4300; // Total duration to show intro (3.5s + small buffer)
 
-    setTimeout(() => {
-        document.body.style.overflowY = 'auto';
-        
-        // Reveal Scroll Indicator
-        const indicator = document.getElementById('scroll-indicator');
-        if (indicator && window.scrollY <= 50) {
-            indicator.classList.add('visible');
-        }
+        setTimeout(() => {
+            document.body.style.overflowY = 'auto';
+            document.body.classList.remove('overflow-hidden');
+            
+            // Reveal Scroll Indicator ONLY after intro animation finishes
+            const indicator = document.getElementById('scroll-indicator');
+            if (indicator && window.scrollY <= 50) {
+                indicator.classList.add('visible');
+                indicator.style.pointerEvents = 'auto';
+            }
 
-        // Scroll Reveal logic
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        };
+            // Scroll Reveal logic
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                } else {
-                    entry.target.classList.remove('visible');
-                }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal, .reveal').forEach(el => observer.observe(el));
+
+            // Marquee replication
+            const marquees = document.querySelectorAll('.conveyor-belt-content');
+            marquees.forEach(m => {
+                const clone = m.innerHTML;
+                m.innerHTML = clone + clone;
             });
-        }, observerOptions);
+        }, INTRO_DURATION);
+    });
 
-        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
-
-        // Marquee replication
-        const marquees = document.querySelectorAll('.conveyor-belt-content');
-        marquees.forEach(m => {
-            const clone = m.innerHTML;
-            m.innerHTML = clone + clone;
-        });
-    }, INTRO_DURATION);
-});</script>
-<style>    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-        40% {transform: translateY(-8px);}
-        60% {transform: translateY(-4px);}
-    }
-    #scroll-indicator {
-        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }</style><div class="scroll-reveal" id="scroll-indicator" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 50; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); pointer-events: none; animation: bounce 2s infinite;"><span class="material-symbols-outlined" style="font-size: 32px; color: black;">keyboard_double_arrow_down</span></div><script>window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', () => {
         const indicator = document.getElementById('scroll-indicator');
         if (!indicator) return;
         if (window.scrollY > 50) {
@@ -429,5 +436,8 @@
             indicator.style.pointerEvents = 'none';
         } else if (indicator.classList.contains('visible')) {
             indicator.style.opacity = '1';
+            indicator.style.pointerEvents = 'auto';
         }
-    });</script></body></html>
+    });
+</script>
+</body></html>
